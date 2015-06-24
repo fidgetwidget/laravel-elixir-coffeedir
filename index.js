@@ -1,9 +1,8 @@
 var gulp    = require('gulp');
 var coffee  = require('gulp-coffee');
+var uglify  = require('gulp-uglify')
+var gulpif  = require('gulp-if');
 var elixir  = require('laravel-elixir');
-
-var config  = elixir.config;
-var plugins = require('gulp-load-plugins')();
 
 var utilities = require('laravel-elixir/ingredients/commands/Utilities');
 var Notification = require('laravel-elixir/ingredients/commands/Notification');
@@ -20,11 +19,12 @@ var Notification = require('laravel-elixir/ingredients/commands/Notification');
  |
  */
 
-elixir.extend('coffeedir', function(src, output) {
+elixir.extend('coffeedir', function(src, output, options) {
 
   var config  = this;
   var baseDir = config.assetsDir + 'coffee/';
   var search  = '**/*.coffee';
+  var options = options || {};
 
   var onError = function(e) {
     new Notification().error(e, 'CoffeeScript Compilation Failed!');
@@ -32,15 +32,13 @@ elixir.extend('coffeedir', function(src, output) {
     this.emit('end');
   };
 
-  src = utilities.buildGulpSrc(src, assetsDir, search);
+  src = utilities.buildGulpSrc(src, baseDir, search);
 
   gulp.task('coffeedir', function() {
 
     return gulp.src(src)
-      .pipe(plugins.if(config.sourcemaps, plugins.sourcemaps.init()))
-      .pipe(plugins.coffee(options).on('error', onError))
-      .pipe(plugins.if(config.production, plugins.uglify()))
-      .pipe(plugins.if(config.sourcemaps, plugins.sourcemaps.write('.')))
+      .pipe(coffee(options).on('error', onError))
+      .pipe(gulpif(config.production, uglify()))
       .pipe(gulp.dest(output || config.jsOutput))
       .pipe(new Notification().message('CoffeeScript Compiled!'));
 
