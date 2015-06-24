@@ -9,5 +9,20 @@
   "author": {
     "username": "fidgetwidget"
   },
+  "keywords": [
+    "gulp",
+    "laravel",
+    "elixir",
+    "coffee"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fidgetwidget/laravel-elixir-coffeedir"
+  },
+  "dependencies": {
+    "laravel-elixir": "^2.0",
+    "gulp-load-plugins": "^0.7.0",
+    "gulp-coffee": "^2.2.0"
+  },
   "license": "MIT"
 }
