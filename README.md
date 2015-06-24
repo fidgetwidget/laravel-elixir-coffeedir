@@ -19,8 +19,8 @@ arguments: source, destination, options
 eg:
 ```.coffeedir('some/folders/to/compile/**/*.coffee', 'where/you/want/it/to/go/')```
 
-**source** default is <config.assetsDir>coffee/\*\*/\*.coffee
+**source** default is {config.assetsDir}coffee/\*\*/\*.coffee
 
-**desination** default is <config.jsOutput>
+**desination** default is {config.jsOutput}
 
 **options** are passed directly to the gulp-coffee task
