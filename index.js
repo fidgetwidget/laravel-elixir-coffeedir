@@ -1,5 +1,4 @@
 var gulp    = require('gulp');
-var notify  = require('gulp-notify');
 var coffee  = require('gulp-coffee');
 var elixir  = require('laravel-elixir');
 
